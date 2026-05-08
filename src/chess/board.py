@@ -1,4 +1,5 @@
 from typing import Tuple, Optional, List, TYPE_CHECKING
+import copy
 
 if TYPE_CHECKING:
     from .pieces import Piece

@@ -1,8 +1,8 @@
 from typing import Tuple, Optional, List
 
-from chess.board import Board
-from chess.pieces import Piece
-from chess.game import Game
+from .board import Board
+from .pieces import Piece
+from .game import Game
 
 
 def render_board(board: Board) -> None:
@@ -57,11 +57,12 @@ def parse_algebraic(move_str: str) -> Tuple[str, str]:
         return ('e8', 'c8')
     
     # Standard moves
-    if len(move_str) == 4 and move_str[0].isalpha():
-        # Piece move: Ke8
+    # Check for piece moves (uppercase letter at start like Ke8, Nf3, Bb5)
+    if len(move_str) == 3 and move_str[0].isupper() and move_str[1].isalpha() and move_str[2].isdigit():
+        # Piece move: Ke8, Nf3, Bb5
         return ('', move_str[1:3])
-    elif len(move_str) == 5 and move_str[0].isalpha():
-        # Piece capture with file: Nbd5
+    elif len(move_str) == 4 and move_str[0].isupper() and move_str[1].isalpha():
+        # Piece capture with file: Nbd5, Qxd5
         return ('', move_str[2:4])
     elif len(move_str) == 4:
         # Simple move: e2e4
